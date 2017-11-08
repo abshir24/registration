@@ -1,0 +1,23 @@
+<form #userForm="ngForm" (submit)="onSubmit()" method="post">
+  <label >First Name</label>
+  <input type="text" name="firstName" required minlength="2" [(ngModel)] = "user.firstName" #firstName='ngModel'><br>
+  <div class="error" *ngIf="!firstName.valid && (firstName.touched || firstName.dirty)">First Name is required</div><br>
+  
+  <label >Last Name</label>
+  <input type="text" name="lastName" required minlength="2" [(ngModel)] = "user.lastName" #lastName='ngModel'><br>
+  <div class="error" *ngIf="!lastName.valid && (lastName.touched || lastName.dirty)">Last Name is required</div><br>
+  
+  <label >Email</label>
+  <input type="text" name="email" required pattern="^([A-Za-z0-9._\-]+)@([a-zA-Z0-9._\-]+)\.([a-zA-Z]+)$" minlength="2" [(ngModel)] = "user.email" #email='ngModel'><br>
+  <div class="error" *ngIf="!email.valid && (email.touched || email.dirty)">Please enter a valid email</div><br>
+  
+  <label >Password</label>
+  <input type="text" name="password" required minlength="8" [(ngModel)] = "user.password" #password='ngModel'><br>
+  <div class="error" *ngIf="!password.valid && (password.touched || password.dirty)"> Password must be at least 8 characters long</div><br>
+
+  <label >Password Confirmation</label>
+  <input type="text" name="confirmPassword" required validateEqual="password" [(ngModel)]="user.confirmPassword" #confirmPassword='ngModel'><br>
+  <div class="error" *ngIf="!confirmPassword.valid && (confirmPassword.touched || confirmPassword.dirty)">Confirm password must match password</div><br>
+  <input type="submit" [disabled]="!userForm.form.valid" name="" value="Register!">
+</form>
+
